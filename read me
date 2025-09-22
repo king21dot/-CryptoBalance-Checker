@@ -1,0 +1,270 @@
+# CryptoChecker - Ethereum Wallet Analyzer
+
+A modern, responsive cryptocurrency wallet checker application that allows users to analyze any Ethereum wallet address and view comprehensive portfolio data including token balances, transaction history, and portfolio distribution charts.
+
+![CryptoChecker Banner](https://via.placeholder.com/800x200/1e3a8a/ffffff?text=CryptoChecker+-+Ethereum+Wallet+Analyzer)
+
+## ✨ Features
+
+### 🔍 Wallet Analysis
+- **ETH Balance Display**: Real-time Ethereum balance with USD conversion
+- **ERC-20 Token Holdings**: Top 5 token holdings with current market prices
+- **Transaction History**: Last 10 transactions with detailed information
+- **Portfolio Distribution**: Interactive pie chart showing asset allocation
+
+### 💾 Data Management
+- **Bookmark Wallets**: Save frequently checked wallet addresses
+- **Export Functionality**: Download wallet data as JSON
+- **Share Wallets**: Share wallet analysis via URL or native sharing
+
+### 🎨 User Experience
+- **Dark/Light Theme**: Toggle between modern dark and light themes
+- **Responsive Design**: Mobile-friendly interface that works on all devices
+- **Loading States**: Smooth loading animations and error handling
+- **Real-time Data**: Live price updates from CoinGecko API
+
+### 🛡️ Security & Performance
+- **API Rate Limiting**: Graceful handling of API rate limits
+- **Error Handling**: Comprehensive error messages for better UX
+- **Input Validation**: Ethereum address format validation
+- **CORS Proxy**: Backend API proxy for secure external API calls
+
+## 🚀 Demo
+
+Try these sample Ethereum wallet addresses to test the application:
+
+| Address | Description |
+|---------|-------------|
+| `0x742d35Cc6635C0532925a3b8D9c0AC16b40f1c8d` | Sample wallet with various token holdings |
+| `0x8ba1f109551bD432803012645Hac136c61c10c4` | Another test wallet for demonstration |
+
+## 📋 Prerequisites
+
+Before running this application, make sure you have:
+
+- **Node.js** (version 18 or higher)
+- **npm** or **yarn** package manager
+- **Etherscan API Key** (free at [etherscan.io](https://etherscan.io/apis))
+
+## 🛠️ Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/cryptochecker.git
+   cd cryptochecker
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env
+   ```
+   
+   Edit `.env` and add your API keys:
+   ```env
+   ETHERSCAN_API_KEY=your_etherscan_api_key_here
+   SESSION_SECRET=your_session_secret_here
+   ```
+
+4. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+5. **Open your browser**
+   
+   Navigate to `http://localhost:5000` to start using the application.
+
+## 🔧 Configuration
+
+### Etherscan API Key
+
+1. Visit [Etherscan.io](https://etherscan.io/apis)
+2. Create a free account
+3. Generate an API key
+4. Add it to your `.env` file
+
+**Rate Limits**: Free tier allows 5 calls/second, 100,000 calls/day
+
+### CoinGecko API
+
+The application uses CoinGecko's free API for cryptocurrency prices. No API key required for basic usage.
+
+## 📖 Usage
+
+### Checking a Wallet
+
+1. **Enter Wallet Address**: Paste any Ethereum wallet address in the search field
+2. **Click Search**: The application will fetch and display:
+   - ETH balance with USD value
+   - Top 5 ERC-20 token holdings
+   - Recent transaction history
+   - Portfolio distribution chart
+
+### Managing Bookmarks
+
+1. **Add Bookmark**: Click the "Bookmark Wallet" button on any analyzed wallet
+2. **View Bookmarks**: Click "View Bookmarks" to see all saved wallets
+3. **Load Bookmark**: Click the external link icon to load a bookmarked wallet
+4. **Remove Bookmark**: Click the trash icon to remove a bookmark
+
+### Exporting Data
+
+1. **Export JSON**: Click "Export Data" to download wallet information as JSON
+2. **Share Wallet**: Click "Share Wallet" to copy the wallet analysis URL
+
+## 🏗️ Architecture
+
+### Frontend
+- **React 18** with TypeScript
+- **Wouter** for client-side routing
+- **TanStack Query** for data fetching and caching
+- **Tailwind CSS** + **shadcn/ui** for styling
+- **Chart.js** for portfolio visualization
+- **Lucide React** for icons
+
+### Backend
+- **Express.js** server
+- **TypeScript** for type safety
+- **Zod** for data validation
+- **In-memory storage** for bookmarks
+- **API proxy** for external services
+
+### External APIs
+- **Etherscan API**: Blockchain data (balances, transactions, tokens)
+- **CoinGecko API**: Cryptocurrency prices and market data
+
+## 📁 Project Structure
+
+```
+cryptochecker/
+├── client/                 # Frontend React application
+│   ├── src/
+│   │   ├── components/     # Reusable UI components
+│   │   ├── pages/          # Application pages
+│   │   ├── hooks/          # Custom React hooks
+│   │   └── lib/            # Utility functions
+├── server/                 # Backend Express server
+│   ├── index.ts           # Server entry point
+│   ├── routes.ts          # API route handlers
+│   └── storage.ts         # Data storage interface
+├── shared/                 # Shared TypeScript types
+│   └── schema.ts          # Zod schemas and types
+└── package.json           # Dependencies and scripts
+```
+
+## 🔧 Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server (frontend + backend) |
+| `npm run build` | Build production version |
+| `npm run preview` | Preview production build |
+| `npm run lint` | Run ESLint |
+| `npm run type-check` | Run TypeScript type checking |
+
+## 🌐 API Endpoints
+
+### POST `/api/wallet`
+Fetch comprehensive wallet data including balance, tokens, and transactions.
+
+**Request Body:**
+```json
+{
+  "address": "0x742d35Cc6635C0532925a3b8D9c0AC16b40f1c8d"
+}
+```
+
+**Response:**
+```json
+{
+  "address": "0x742d35Cc6635C0532925a3b8D9c0AC16b40f1c8d",
+  "ethBalance": "1.5",
+  "ethUsdPrice": 2500.50,
+  "tokens": [...],
+  "transactions": [...],
+  "totalUsdValue": 3750.75
+}
+```
+
+### Bookmark Management
+- `GET /api/bookmarks` - Retrieve all bookmarks
+- `POST /api/bookmarks` - Add new bookmark
+- `DELETE /api/bookmarks/:address` - Remove bookmark
+
+## 🎨 Customization
+
+### Theme Customization
+
+Edit `client/src/index.css` to customize colors:
+
+```css
+:root {
+  --primary: hsl(217 91% 60%);
+  --background: hsl(218 30% 15%);
+  /* ... other color variables */
+}
+```
+
+### Adding New Features
+
+1. **Define Types**: Add new schemas in `shared/schema.ts`
+2. **Backend Logic**: Implement API routes in `server/routes.ts`
+3. **Frontend Components**: Create React components in `client/src/components/`
+4. **Update Storage**: Modify storage interface if needed
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**API Rate Limit Exceeded**
+- Wait a few moments before making new requests
+- Consider upgrading to a paid Etherscan plan for higher limits
+
+**Invalid Wallet Address**
+- Ensure the address is a valid Ethereum address (42 characters, starts with 0x)
+- Double-check for typos in the address
+
+**No Token Data Showing**
+- Some wallets may not have recent ERC-20 token transactions
+- Tokens with zero balances are filtered out
+
+**Application Not Loading**
+- Check that all environment variables are set correctly
+- Ensure Etherscan API key is valid and active
+- Verify Node.js version compatibility
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+### Development Setup
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 🔗 Links
+
+- [Etherscan API Documentation](https://docs.etherscan.io/)
+- [CoinGecko API Documentation](https://www.coingecko.com/en/api)
+- [React Documentation](https://reactjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+
+## ⭐ Support
+
+If you found this project helpful, please give it a star on GitHub!
+
+---
+
+**Made with ❤️ for the Ethereum community**
