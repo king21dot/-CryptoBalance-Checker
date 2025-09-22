@@ -1,0 +1,14 @@
+# Etherscan API Configuration
+# Get your free API key from: https://etherscan.io/apis
+ETHERSCAN_API_KEY=YourApiKeyToken
+
+# Session Configuration
+# Generate a random secret for production
+SESSION_SECRET=your-super-secret-session-key-here
+
+# Development Configuration (Optional)
+NODE_ENV=development
+
+# API URLs (Leave as default unless using custom endpoints)
+# ETHERSCAN_API_URL=https://api.etherscan.io/api
+# COINGECKO_API_URL=https://api.coingecko.com/api/v3
